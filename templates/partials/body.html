@@ -1,11 +1,20 @@
 <body>
     {% include "./partials/navbar.html" %}
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p style="color:green"><b>{{msg}}</b></p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
     <div class="blogs content">
         <h2>All Blogs</h2>
         {% for blog in blogs %}
-            <a class="single" href="/blogs/{{ blog._id }}">
+            <a class="single" href="/blogs/{{ blog._id }}"
             <h3 class="title">{{ blog.title }}</h3>
-            <p class="snippet">{{ blog.snippet }}</p>                
+            <p class="snippet">{{ blog.snippet }}</p></a>                
         {% endfor %}
     </div>
 </body>

@@ -23,4 +23,16 @@ def get_all_blogs():
         all_blogs = blogs_collection.find() #hakee kaikki
         return all_blogs
 
+def save_blog(form):
+    blogs_collection= db['BlogsCollection']
+    # haetaan formista title,snippet ja body
+    title = form['title']
+    snippet = form['snippet']
+    body = form['body']
+
+    # luodaan tietokantaan collectioniin uusi JSON
+    new_blog = {"title":title, "snippet":snippet, "body":body}
+    # lisätään new_blog mongoon
+    blogs_collection.insert_one(new_blog)
+
 db = connect_to_mongo()
