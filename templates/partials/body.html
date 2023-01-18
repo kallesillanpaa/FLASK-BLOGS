@@ -1,0 +1,11 @@
+<body>
+    {% include "./partials/navbar.html" %}
+    <div class="blogs content">
+        <h2>All Blogs</h2>
+        {% for blog in blogs %}
+            <a class="single" href="/blogs/{{ blog._id }}">
+            <h3 class="title">{{ blog.title }}</h3>
+            <p class="snippet">{{ blog.snippet }}</p>                
+        {% endfor %}
+    </div>
+</body>
