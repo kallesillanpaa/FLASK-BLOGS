@@ -31,8 +31,8 @@ def show_blog(id): #näyttää painetun blogin sisällön
 def delete_blog(id):
     delete_blog_by_id(id)
     flash("Blog deleted!")
-    #return redirect("/")
-    return "JEFDKJDSF"
+    return redirect("/")
+    
 
 
 
