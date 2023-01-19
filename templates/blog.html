@@ -9,7 +9,8 @@
                 <p>{{blog.snippet}}</p>
                 <p>{{blog.body}}</p>
             </div>
-    <a href="{{url_for('delete_blog', id=blog._id)}}"class="delete">Delete</a>
+    <a href="{{url_for('delete_blog', id=blog._id)}}"class="delete" onclick="return confirm('Are you sure to delete?')">Delete</a>
+    <a href="{{url_for('update_blog', id=blog._id)}}"class="update">Update</a>
 </div>
 </body>
 </html>

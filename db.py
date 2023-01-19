@@ -11,8 +11,7 @@ def connect_to_mongo():
         print("cannot connect")
         raise e
 
-def get_all_blogs():
-    blogs_collection= db['BlogsCollection'] # asetaan, mitä collectionia käytetään
+def get_all_blogs():  
     blogs = len(list(blogs_collection.find())) #montako blogia löytyy        
     
     if blogs==0: #ei blogeja
@@ -25,7 +24,6 @@ def get_all_blogs():
         return all_blogs
 
 def save_blog(form):
-    blogs_collection= db['BlogsCollection']
     # haetaan formista title,snippet ja body
     title = form['title']
     snippet = form['snippet']
@@ -37,12 +35,31 @@ def save_blog(form):
     blogs_collection.insert_one(new_blog)
 
 def get_blog_by_id(id):
-    blogs_collection= db['BlogsCollection']
     blog = blogs_collection.find_one({"_id":ObjectId(id)})
     return blog
 
 def delete_blog_by_id(id):
-    blogs_collection= db['BlogsCollection']
     blogs_collection.find_one_and_delete({"_id":ObjectId(id)})
 
+def update_blog_by_id(form, id):
+    title = form['title']
+    snippet = form['snippet']
+    body = form['body']
+
+    filter = {"_id":ObjectId(id)}
+    update = {"$set":
+             {"title":title, "snippet":snippet, "body":body}
+             }
+
+    blogs_collection.find_one_and_update(filter,update)                
+    
+    # tai:
+    # blogs_collection.find_one_and_update(
+    # {"_id":ObjectId(id)},
+    #     {"$set":
+    #     {"title":title, "snippet":snippet, "body":body}
+    #     }
+    #)
+
 db = connect_to_mongo()
+blogs_collection = db['BlogsCollection']
