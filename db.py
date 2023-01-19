@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 
 def connect_to_mongo():
     try:
@@ -34,5 +35,14 @@ def save_blog(form):
     new_blog = {"title":title, "snippet":snippet, "body":body}
     # lisätään new_blog mongoon
     blogs_collection.insert_one(new_blog)
+
+def get_blog_by_id(id):
+    blogs_collection= db['BlogsCollection']
+    blog = blogs_collection.find_one({"_id":ObjectId(id)})
+    return blog
+
+def delete_blog_by_id(id):
+    blogs_collection= db['BlogsCollection']
+    blogs_collection.find_one_and_delete({"_id":ObjectId(id)})
 
 db = connect_to_mongo()

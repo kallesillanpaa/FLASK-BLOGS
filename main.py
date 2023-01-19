@@ -21,5 +21,19 @@ def create():
         flash("BLOG CREATED!")
         return redirect("/")
 
+@app.route("/blogs/<id>") #<string:id> <int:id>
+def show_blog(id): #näyttää painetun blogin sisällön
+    # eli näyttää blog.html -tiedoston.
+    blog_by_id = get_blog_by_id(id)
+    return render_template('blog.html', blog=blog_by_id, title="Blog Details")
+
+@app.route("/blogs/delete/<id>")
+def delete_blog(id):
+    delete_blog_by_id(id)
+    flash("Blog deleted!")
+    #return redirect("/")
+    return "JEFDKJDSF"
+
+
 
 app.run() # käynnistää applikaation selaimessa, jää päälle
