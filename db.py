@@ -61,5 +61,9 @@ def update_blog_by_id(form, id):
     #     }
     #)
 
+def get_blog_by_num(id):
+    blog = blogs_collection.find_one({"id":int(id)})
+    return blog
+
 db = connect_to_mongo()
 blogs_collection = db['BlogsCollection']

@@ -1,5 +1,7 @@
-from flask import Flask, render_template, request, redirect, flash
+from flask import Flask, render_template, request, redirect, flash, jsonify
 from db import *
+import json
+from bson import json_util
 
 # luodaan Flask-applikaatio:
 app = Flask("flask-blogit")
@@ -45,5 +47,11 @@ def update_blog(id):
         update_blog_by_id(request.form, id)
         flash("Blog Updated!")
         return redirect("/")
+
+@app.route("/api/<id>")
+def get_blog_by_lkjfds(id):    
+    blog =get_blog_by_num(id)    
+    return json.loads(json_util.dumps(blog))            
+    
 
 app.run() # käynnistää applikaation selaimessa, jää päälle
